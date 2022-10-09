@@ -6,19 +6,75 @@ use App\Http\Controllers\Controller;
 use App\Models\Twitt;
 use Illuminate\Http\Request;
 
+
 class TwittController extends Controller
 {
-    /* Display a listing of the resource.
+    /* Get number of twitts by hashtag.
     *
     * @return \Illuminate\Http\Response
     */
-    public function index()
+    public function getTwitts()
     {
         // $twitts = Twitt::all();
         $twitts = queryTwitter('farina');
         return response()->json([
             // "success" => true,
             // "message" => "Twitts List Here !!!",
+            "data" => $twitts
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $twitts = Twitt::all();
+        return response()->json([
+            "success" => true,
+            "message" => "Product List",
+            "data" => $twitts
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $input = $request->all();
+        // $validator = Validator::make($input, [
+        //     'twittID' => 'required',
+        //     'text' => 'required'
+        // ]);
+        // if ($validator->fails()) {
+        //     return $this->sendError('Validation Error.', $validator->errors());
+        // }
+        $twitts = Twitt::create($input);
+        return response()->json([
+            "success" => true,
+            "message" => "Twit created successfully.",
+            "data" => $twitts
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Twitt $twitts)
+    {
+        $twitts->delete();
+        return response()->json([
+            "success" => true,
+            "message" => "Twitt deleted successfully.",
             "data" => $twitts
         ]);
     }

@@ -15,6 +15,6 @@ class Twitt extends Model
      * @var array
      */
     protected $fillable = [
-        'twittID', 'detail'
+        'twittID', 'text'
     ];
 }

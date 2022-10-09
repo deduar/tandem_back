@@ -16,7 +16,7 @@ class CreateTwittsTable extends Migration
         Schema::create('twitts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('twittID');
-            $table->text('detail');
+            $table->text('text');
             $table->timestamps();
         });
     }

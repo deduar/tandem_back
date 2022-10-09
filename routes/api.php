@@ -20,4 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('tw', TwittController::class);
+
+Route::get('/tw/getTwitts', [TwittController::class, 'getTwitts'])->name('getTwitts');
+Route::resource('/tw', TwittController::class);
+
